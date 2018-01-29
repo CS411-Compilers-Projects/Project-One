@@ -1,0 +1,4 @@
+if
+01
+0x2AFE
+int test=3+(int)15.05820E2;
