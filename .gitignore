@@ -1,4 +1,4 @@
 # .gitignore
-.idea/*
-out/*
+/.idea
+/out
 Project-One.iml
