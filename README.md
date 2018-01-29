@@ -8,4 +8,4 @@ Project #1<br>
 (Due: 10 AM, Tuesday, 1/30/2018)<br>
 <br>
 INSTRUCTIONS:<br>
-Compile "Client.java" and "ToyLexer.java".  Execute with "input1.txt" and "input2.txt" in the same directory.<br>
+Compile "Client.java" and "ToyLexer.java" in JAVA.  Execute with "input1.txt" and "input2.txt" in the same directory.<br>
