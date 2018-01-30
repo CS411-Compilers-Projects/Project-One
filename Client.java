@@ -51,7 +51,7 @@ public class Client {
 		}
 		System.out.println("          TEST 2 (input2.txt)              ");
 		System.out.println(("\n************** TOKEN OUTPUT*************"));
-		toyLexer1.dumpTokens();
+		toyLexer.dumpTokens();
 		System.out.println();
 		System.out.println(("\n************** SYMBOL TABLE OUTPUT ***************"));
 		toyLexer.dumpSymbolTable();
