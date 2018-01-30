@@ -1,4 +1,8 @@
 /**
+ * Name: Phuoc G Ngo
+ *	 Scott Matsumura
+ *
+ * Class: CS 411 - Compilers & Interpreters
  * Assignment:	Project #1
  * 
  * INSTRUCTIONS: Compile both Client.java and ToyLexer.java files and make sure
@@ -11,7 +15,7 @@ import java.io.PushbackReader;
 
 /**
  * 
- * The client class creates a ToyLexer object for each input file, reads in the
+ * The Client class creates a ToyLexer object for each input file, reads in the
  * tokens from each file, and outputs the results to System.out
  */
 public class Client {
