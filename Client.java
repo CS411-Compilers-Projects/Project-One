@@ -2,7 +2,7 @@
  * Name: Phuoc G Ngo
  *	 Scott Matsumura
  *
- * Class: CS 411 - Compilers & Interpreters
+ * Class: CS 411 - Compilers and Interpreters
  * Assignment:	Project #1
  * 
  * INSTRUCTIONS: Compile both Client.java and ToyLexer.java files and make sure
