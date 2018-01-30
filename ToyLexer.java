@@ -7,23 +7,19 @@ import java.util.ArrayList;
 
 /**
  * This class implements a lexical analyzer for the Toy language. Tokens are
- * read in and placed into a linked list so that they can be output whenever
+ * read in and placed into an array list so that they can be output whenever
  * needed. The lexer spots scanning tokens when the end of the file has been
  * reached.
  */
 public class ToyLexer {
 	private static final char EOF_CHAR = (char) -1;
-	
 	private PushbackReader 	source;
 	private List<ToyToken> 	tokens;
-	private Trie 			symTab;
-	private boolean 		eofReached;
-	
+	private Trie symTab;
+	private boolean eofReached;
 	
 	/**
 	 * Constructor
-	 * 
-	 * @param source - a PushbackReader containing a stream to the input file
 	 */
 	public ToyLexer(PushbackReader source) {
 		this.source = source;
@@ -33,11 +29,9 @@ public class ToyLexer {
 		insertKeywords(); // initialize the symbol table with the keywords
 	}
 	
-	
 	/**
 	 * Scans the input stream and constructs the next recognized token.
 	 * Whitespace and comments encountered are stripped out.
-	 * 
 	 * The next token scanned is added to the tokens list.
 	 */
 	public void scanNextToken() throws IOException {
@@ -228,7 +222,6 @@ public class ToyLexer {
 		}
 	}
 	
-	
 	/**
 	 * Handles double constants. Method is called ONLY after a '.' has been
 	 * read in from the input stream. 
@@ -247,7 +240,6 @@ public class ToyLexer {
 			pushback(curr);
 		}
 	}
-	
 	
 	/**
 	 * Method consumes valid characters for exponent.
@@ -300,7 +292,6 @@ public class ToyLexer {
 				(c == 'D') || (c == 'E') || (c == 'F');
 	}
 	
-	
 	/**
 	 * Checks if end of file was reached
 	 * 
@@ -309,7 +300,6 @@ public class ToyLexer {
 	public boolean isEOF() {
 		return eofReached;
 	}
-	
 	
 	/**
 	 * Prints out the tokens to System.out
@@ -324,7 +314,6 @@ public class ToyLexer {
 				System.out.print(t.toString() + " ");
 		}
 	}
-	
 	
 	/**
 	 * Checks if parameter c is a whitespace character
@@ -342,9 +331,6 @@ public class ToyLexer {
 	/**
 	 * Gets the first non-whitespace character for the lexer to begin token
 	 * determination.
-	 * 
-	 * @return non-whitespace character
-	 * @throws IOException
 	 */
 	private char nextUsefulChar() throws IOException {
 		char curr = readChar();
@@ -386,32 +372,21 @@ public class ToyLexer {
 			} else {
 				usefulChar = true;
 			}
-			
 		} while (usefulChar == false);
-		
-		
 		return curr;
 	}
-	
 	
 	/**
 	 * Read next character from input stream
 	 * 
-	 * @return
-	 * @throws IOException
 	 */
 	private char readChar() throws IOException { return (char)source.read(); }
 	
 	
 	/**
 	 * Push back a character into the input stream
-	 * 
-	 * @param c
-	 * @throws IOException
 	 */
 	private void pushback(char c) throws IOException { source.unread((int)c); }
-	
-	
 	/**
 	 * Insert the keywords of the Toy language into the symbol table
 	 */
@@ -440,7 +415,7 @@ public class ToyLexer {
 	
 	
 	public void dumpSymbolTable() {
-		symTab.prettyPrint(15);
+		symTab.tablePrint(15);
 	}
 	
 	
@@ -484,10 +459,8 @@ public class ToyLexer {
 		}
 		
 		
-		
 		//Prints out the contents of this trie in a columnated format
-		// **WRITTEN BY JACOB BUCHOWIECKI**
-	    public void prettyPrint (int cols) {
+	    public void tablePrint (int cols) {
 	        //Print alphabet and switch array
 	        int i = 0;
 	        while (i < alphabet.length) {
@@ -548,13 +521,8 @@ public class ToyLexer {
 	            i += cols;
 	        }
 	    }
-		
-		
 		/**
-		 * Inserts a string into the trie table.
-		 * 
-		 * @param s - string to be inserted
-		 * @return true if s inserted into table, false if s already exists
+		 * Inserts a string into the trie table
 		 */
 		void insert(String s) {		
 			int charPos = 0;
@@ -614,13 +582,10 @@ public class ToyLexer {
 				}
 			}	
 		}
-	    
 		
 		/**
 		 * Inserts a string into an empty location in the symbol table.
 		 * 
-		 * @param s - string to be inserted
-		 * @param ptr - position where string will be inserted
 		 */
 		private void create(String s, int ptr) {
 			for (int i = 0; i < s.length(); i++) {
@@ -630,12 +595,9 @@ public class ToyLexer {
 			nextFreeSpot = ptr;
 		}
 		
-		
 		/**
 		 * Returns an index number for the switch array in the symbol table.
 		 *  
-		 * @param c - character of first element in the string
-		 * @return index corresponding to the character
 		 */
 		private int getSwitchIndex(char c) {
 			if (Character.isUpperCase(c))
@@ -643,66 +605,62 @@ public class ToyLexer {
 			else
 				return ((int) c) - 71;
 		}
-		
-		
 	} // end of class Trie
 	
 	/**
-	 * 
 	 * Tokens are implemented using an enum. Each token is assigned a unique
 	 * number to be used in the future with the syntax analyzer.
-	 *
 	 */
 	private enum ToyToken {
 		_boolean(1, "boolean"),
-		_break(2, "break"),
-		_class(3, "class"),
-		_double(4, "double"),
-		_else(5, "else"),
-		_extends(6, "extends"),
-		_for(7, "for"),
-		_if(8, "if"),
-		_implements(9, "implements"),
-		_int(10, "int"),
-		_interface(11, "interface"),
-		_newarray(12, "newarray"),
-		_println(13, "println"),
-		_readln(14, "readln"), 
-		_return(15, "return"),
-		_string(16, "string"),
-		_void(17, "void"),
-		_while(18, "while"),
-		_plus(19, "plus"),
-		_minus(20, "minus"),
-		_multiplication(21, "multiplication"),
-		_division(22, "division"),
-		_mod(23, "mod"),
-		_less(24, "less"),
-		_lessequal(25, "lessequal"),
-		_greater(26, "greater"),
-		_greaterequal(27, "greaterequal"),
-		_equal(28, "equal"),
-		_notequal(29, "notequal"),
-		_and(30, "and"),
-		_or(31, "or"),
-		_not(32, "not"),
-		_assignop(33, "assignop"),
-		_semicolon(34, "semicolon"),
-		_comma(35, "comma"),
-		_period(36, "period"),
-		_leftparen(37, "leftparen"),
-		_rightparen(38, "rightparen"),
-		_leftbracket(39, "leftbracket"),
-		_rightbracket(40, "rightbracket"),
-		_leftbrace(41, "leftbrace"),
-		_rightbrace(42, "rightbrace"),
-		_intconstant(43, "intconstant"),
-		_doubleconstant(44, "doubleconstant"),
-		_stringconstant(45, "stringconstant"),
-		_booleanconstant(46, "booleanconstant"),
-		_id(47, "id"),
+		_else(2, "else"),
+		_implements(3, "implements"),
+		_println(4, "println"),
+		_void(5, "void"),
+		_multiplication(6, "multiplication"),
+		_lessequal(7, "lessequal"),
+		_notequal(8, "notequal"),
+		_assignop(9, "assignop"),
+		_leftparen(10, "leftparen"),
+		_leftbrace(11, "leftbrace"),
+		_stringconstant(12, "stringconstant"),
+		_break(13, "break"),
+		_extends(14, "extends"),
+		_int(15, "int"),
+		_readln(16, "readln"), 
+		_while(17, "while"),
+		_division(18, "division"),
+		_greater(19, "greater"),
+		_and(20, "and"),
+		_semicolon(21, "semicolon"),
+		_rightparen(22, "rightparen"),
+		_rightbrace(23, "rightbrace"),
+		_booleanconstant(24, "booleanconstant"),
+		_class(25, "class"),
+		_for(26, "for"),
+		_interface(27, "interface"),
+		_return(28, "return"),
+		_plus(29, "plus"),
+		_mod(30, "mod"),
+		_greaterequal(31, "greaterequal"),
+		_or(32, "or"),
+		_comma(33, "comma"),
+		_leftbracket(34, "leftbracket"),
+		_intconstant(35, "intconstant"),
+		_id(36, "id"),
+		_double(37, "double"),	
+		_if(38, "if"),
+		_newarray(39, "newarray"),
+		_string(40, "string"),
+		_minus(41, "minus"),
+		_less(42, "less"),
+		_equal(43, "equal"),
+		_not(44, "not"),
+		_period(45, "period"),
+		_rightbracket(46, "rightbracket"),
+		_doubleconstant(47, "doubleconstant"),
 		_carriageReturn(48, "carriage"),
-		_eof(49, "EOF"),
+		_eof(49, "EndOfFile"),
 		_ERROR(50, "ERROR_TOKEN");
 		
 		private final int tokenNum;
@@ -714,8 +672,6 @@ public class ToyLexer {
 		}
 		
 		public int getTokenNumber() { return tokenNum; }		
-		public String toString() { return tokenString; }
-		
-	} // end of enum ToyToken
-
-} // end of class ToyLexer
+		public String toString() { return tokenString; }	
+	} 
+} 
