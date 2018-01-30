@@ -3,6 +3,7 @@ import java.io.PushbackReader;
 import java.util.Iterator;
 import java.util.List;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * This class implements a lexical analyzer for the Toy language. Tokens are
@@ -26,7 +27,7 @@ public class ToyLexer {
 	 */
 	public ToyLexer(PushbackReader source) {
 		this.source = source;
-		tokens = new LinkedList<ToyToken>();
+		tokens = new ArrayList<ToyToken>();
 		symTab = new Trie();
 		eofReached = false;	
 		insertKeywords(); // initialize the symbol table with the keywords
