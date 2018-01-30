@@ -22,25 +22,26 @@ public class Client {
 		////////////////////////////////////////////////////
 		
 		// open up stream for source file and pass to lexer
-/*
-		String filename = "input1.txt";
-		PushbackReader source = new PushbackReader(new FileReader(filename), 3);
-		ToyLexer toyLexer = new ToyLexer(source);
-		
+
+		String filename1 = "input1.txt";
+		PushbackReader source1 = new PushbackReader(new FileReader(filename1), 3);
+		ToyLexer toyLexer1 = new ToyLexer(source1);
+
 		// scan tokens until end of file
-		while (!toyLexer.isEOF())
-			toyLexer.scanNextToken();	
-		
+		while (!toyLexer1.isEOF()) {
+			toyLexer1.scanNextToken();
+		}
+
 		System.out.println("--------------------------------------------");
 		System.out.println("|         TEST 1 (input1.txt)              |");
 		System.out.println("--------------------------------------------");
 		System.out.println(("\n------------- TOKEN OUTPUT -----------------"));
-		toyLexer.dumpTokens();
+		toyLexer1.dumpTokens();
 		System.out.println();
 		System.out.println(("\n------------- SYMBOL TABLE OUTPUT -----------"));
-		toyLexer.dumpSymbolTable();	
+		toyLexer1.dumpSymbolTable();
 		System.out.println();
-*/		
+
 		/////////////////////////////////////////////////////
 		// TEST 2
 		////////////////////////////////////////////////////
@@ -51,7 +52,6 @@ public class Client {
 
 		// scan tokens until end of file
 		while (!toyLexer.isEOF()){
-			System.out.println("ahihi");
 			toyLexer.scanNextToken();
 		}
 		System.out.println("--------------------------------------------");

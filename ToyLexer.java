@@ -42,7 +42,6 @@ public class ToyLexer {
 	public void scanNextToken() throws IOException {
 		char curr, peek;
 		curr = nextUsefulChar();
-		
 		// HANDLE OPERATORS
 		switch (curr) {
 		
@@ -333,7 +332,7 @@ public class ToyLexer {
 	 * @return true if c is whitespace, false otherwise
 	 */
 	private boolean isWhiteSpace(char c) {
-		if (c == '\r')
+		if (c == '\r' || c == '\n')
 			tokens.add(ToyToken._carriageReturn);
 		return (c == ' ') || (c == '\t') || (c == '\n') || (c == '\r');
 	}
@@ -362,14 +361,17 @@ public class ToyLexer {
 				switch (peek) {
 				case '/':
 					tokens.add(ToyToken._carriageReturn);
-					while ((curr = readChar()) != '\r') {}
+					curr = readChar();
+					while (curr != '\r' && curr != '\n') {
+						curr = readChar();
+					}
 					curr = readChar();
 					break;
 				case '*':
 					curr = readChar();
 					peek = readChar();
 					while (curr != '*' || peek != '/') {
-						if (curr == '\r')
+						if (curr == '\r' || curr == '\n')
 							tokens.add(ToyToken._carriageReturn);
 						curr = peek;
 						peek = readChar();
