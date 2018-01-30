@@ -40,10 +40,7 @@ public class Client {
 		toyLexer1.dumpSymbolTable();
 		System.out.println();
 
-		/////////////////////////////////////////////////////
 		// TEST 2
-		////////////////////////////////////////////////////
-
 		String filename = "input2.txt";
 		PushbackReader source = new PushbackReader(new FileReader(filename), 3);
 		ToyLexer toyLexer = new ToyLexer(source);
