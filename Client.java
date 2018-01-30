@@ -17,12 +17,8 @@ import java.io.PushbackReader;
 public class Client {
 
 	public static void main(String[] args) throws Exception {
-		/////////////////////////////////////////////////////
 		// TEST 1
-		////////////////////////////////////////////////////
-		
 		// open up stream for source file and pass to lexer
-
 		String filename1 = "input1.txt";
 		PushbackReader source1 = new PushbackReader(new FileReader(filename1), 3);
 		ToyLexer toyLexer1 = new ToyLexer(source1);
@@ -31,14 +27,12 @@ public class Client {
 		while (!toyLexer1.isEOF()) {
 			toyLexer1.scanNextToken();
 		}
-
-		System.out.println("--------------------------------------------");
-		System.out.println("|         TEST 1 (input1.txt)              |");
-		System.out.println("--------------------------------------------");
-		System.out.println(("\n------------- TOKEN OUTPUT -----------------"));
+		
+		System.out.println("          TEST 1 (input1.txt)              ");
+		System.out.println(("\n************** TOKEN OUTPUT*************"));
 		toyLexer1.dumpTokens();
 		System.out.println();
-		System.out.println(("\n------------- SYMBOL TABLE OUTPUT -----------"));
+		System.out.println(("\n************** SYMBOL TABLE OUTPUT ***************"));
 		toyLexer1.dumpSymbolTable();
 		System.out.println();
 
@@ -54,13 +48,11 @@ public class Client {
 		while (!toyLexer.isEOF()){
 			toyLexer.scanNextToken();
 		}
-		System.out.println("--------------------------------------------");
-		System.out.println("|         TEST 2 (input2.txt)              |");
-		System.out.println("--------------------------------------------");
-		System.out.println(("\n------------- TOKEN OUTPUT -----------------"));
-		toyLexer.dumpTokens();
+		System.out.println("          TEST 2 (input2.txt)              ");
+		System.out.println(("\n************** TOKEN OUTPUT*************"));
+		toyLexer1.dumpTokens();
 		System.out.println();
-		System.out.println(("\n------------- SYMBOL TABLE OUTPUT -----------"));
+		System.out.println(("\n************** SYMBOL TABLE OUTPUT ***************"));
 		toyLexer.dumpSymbolTable();
 		System.out.println();
 	}
